@@ -33,7 +33,7 @@ public class Generic_Printer <VariableType> {
 /*
 Generics allows us to avoid repeating any code if we want to input different variable types
 
-Generics prevented me from having to do all this for all type of variables:
+Generics prevented from having to do all this for all type of variables:
 
 --> For String:
 public class Generic_Printer {

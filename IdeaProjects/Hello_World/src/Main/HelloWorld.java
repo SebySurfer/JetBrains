@@ -938,7 +938,7 @@ public class HelloWorld {
         //Lists
 
         /*
-        List is an interface from  java library that enables you to modify the storage capacity of an array,
+        List is an interface from java library that enables you to modify the storage capacity of an array,
         basically just acting as a list
 
         Difference with just normal arrays:
@@ -1007,14 +1007,14 @@ public class HelloWorld {
               in between the index, it has to follow these 'next' or 'previous' pointers to get the value it wants.
 
               CON: So if it needs to find the 400th element, it won't go directly there. It has to start at the first element
-              and keep getting the next value until reaching the 400th element. THIS is why its not as efficient when dealing with long lists
+              and keep getting the next values until reaching the 400th element. THIS is why its not as efficient when dealing with long lists
 
               PRO: However, it doesn't create a new list. It only adds in to its capacity.
 
 
         --> BUT BEFORE WE START WITH LISTS...  Why '<>' ?? GENERICS!!
 
-        Have you ever wondered if there could make a Class that can hold ANY kind of variable ?!? READ MORE !!!
+        Have you ever wondered if there could be a Class that can hold ANY kind of variable ?!? READ MORE !!!
 
         Generics: it gives you the ability to create a class that is flexible for any different type of variable
         Quick Example: You create a class just to print String values. What if you want it to have the SAME FUNCTIONALITY but for 'int' values ? Then we literally have to
@@ -1045,6 +1045,8 @@ public class HelloWorld {
 
         /*
         Why 'Arrays.asList' ?
+
+        Its within the Java Framework Interface, where it holds its own methods
 
 
          */

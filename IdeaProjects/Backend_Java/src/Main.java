@@ -2,6 +2,11 @@ import Interface_Ex.Creature;
 import Interface_Ex.Demigod;
 import Interface_Ex.Human;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Vector;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
@@ -266,11 +271,11 @@ public class Main {
 
          */
 
-        thread1.start();
+        //thread1.start();
 
-        thread1.join(3000);
+        //thread1.join(3000);
 
-        thread2.start();
+        //thread2.start();
 
 
         /*
@@ -331,6 +336,9 @@ public class Main {
         additional features or inheritance. Implementing Runnable creates threads (skyscrapers) based on a standard
         blueprint, allowing for consistency and flexibility in design and inheritance.
          */
+
+
+
 
 
 
@@ -461,13 +469,13 @@ public class Main {
         Knight.shield();
 
 
-
 //**********************************************************************************************************************
-        //Polymorphism
+        //Lambdas
+
+        /*
 
 
-
-
+         */
 
 
 
@@ -476,7 +484,7 @@ public class Main {
 
         /*
 
-        Provides an architecture to store and maniputalte a group of ojects
+        Provides an architecture to store and manipulate a group of objects
 
         Analogy:
             Piggy Bank = Collection framework
@@ -484,12 +492,190 @@ public class Main {
             Coins = Objects
 
         The collection framework subdivides into three parts:
-        1. Interfaces = top most position of the hierarchy, it holds abstract objects
+        1. Interfaces = (top most position of the hierarchy), holds abstract classes
         2. Classes
         3. Algorithms
 
 
+        The Java Collections Framework holds 3 kinds of interfaces, and objects to their respective interface:
+        1. List:
+        - ArrayList
+        - LinkedList
+        - Vector
+
+        2. Queue:
+        - ArrayDeque
+            Deque:
+            - PriorityQueue
+
+        3. Set:
+        - HashSet
+        - LinkedHashSet
+            SortedSet:
+            - TreeSet
+
          */
+
+//**********************************************************************************************************************
+        //Vectors
+
+        /*
+        Vectors are exactly the same as ArrayLists and LinkedLists, however, there's a great difference in preformance.
+
+        Main difference between the other object list classes and vectors:
+        A Vector is thread-safe and the other lists isn't.
+        Operations on an List aren't synchronized, they are not thread-safe.
+        To operate multi-threads on a List at the same time results in completely non-deterministic
+        behaviour and exceptions.
+
+
+        Disadvantages of Vectors:
+        I's slower in adding a very large number of items in the list (Vector) in one single thread
+
+        Advantages:
+        It is thread safe and synchronized, meaning that it can handle multi-Threads
+        This thread safety does come with a performance cost.
+
+        Generally, just use ArrayLists = in the relatively rare circumstances that you need to synchronize those
+        individual operations across a bunch of different threads, you can just use a synchronized list wrapper
+        to take care of that.
+
+
+         */
+
+        //Single-Thread Environment: Here we showcase an example on the preformance in a
+
+        int size = 1000000;
+
+        ArrayList<Integer> arrayList = new ArrayList<>();
+
+        //currentTimeMills sets for the currrent time of the system in miliseconds
+
+        long start = System.currentTimeMillis();
+
+        for(int i = 0; i < size; i++){
+            arrayList.add(i);
+        }
+
+        long end = System.currentTimeMillis();
+
+        System.out.println("Time for ArrayList: " + (end - start) + " ms" );
+
+
+        start = System.currentTimeMillis();
+
+        Vector<Integer> vector= new Vector<>();
+
+        for(int i = 0; i < size; i++){
+            vector.add(i);
+        }
+
+        end = System.currentTimeMillis();
+
+        System.out.println("Time for Vector: " + (end - start) + " ms" );
+
+
+        //As you can notice, the Vector takes twice as much time as the ArrayList
+
+
+        //Multi-Threaded environment
+
+        // First we create two threads to engage at the same time for an ArrayList
+
+        ArrayList<Integer> multiThread_List = new ArrayList<>();
+        start = System.currentTimeMillis();
+
+
+
+        Thread t1 = new Thread(() -> {
+            for(int i = 0; i < size; i++){
+                multiThread_List.add(i);
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            for(int i = 0; i < size; i++){
+                multiThread_List.add(i);
+            }
+        });
+
+        t1.start();
+        t2.start();
+        //The join() method makes sure that until both of those threads are completed, we can continue our work bellow
+
+        t1.join();
+        t2.join();
+
+        end = System.currentTimeMillis();
+        System.out.println("Time for multi-threaded Arraylist: " + (end - start) + "ms");
+
+
+        // Then we create two threads to engage at the same time for a Vector
+
+
+        Vector<Integer> multiThread_Vector = new Vector<>();
+        start = System.currentTimeMillis();
+
+
+
+        Thread ta = new Thread(() -> {
+            for(int i = 0; i < size; i++){
+                multiThread_Vector.add(i);
+            }
+        });
+
+        Thread tb = new Thread(() -> {
+            for(int i = 0; i < size; i++){
+                multiThread_Vector.add(i);
+            }
+        });
+
+        ta.start();
+        tb.start();
+
+        ta.join();
+        tb.join();
+
+        end = System.currentTimeMillis();
+        System.out.println("Time for multi-threaded Vector: " + (end - start) + "ms");
+
+        /*
+        You can see here that the Vector still took a tole on the time.
+        However, once we uncover the number of items in each lists, we'll uncover something quite surprising.
+
+        Logically, we'll have 2 million items for every list
+         */
+
+        System.out.println("ArrayList ");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
